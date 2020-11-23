@@ -2,8 +2,13 @@ package com.kidzona.parentsservice.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.kidzona.parentsservice.converter.ParentConverter;
+import com.kidzona.parentsservice.dto.ParentDto;
 import com.kidzona.parentsservice.entity.Kid;
 import com.kidzona.parentsservice.entity.Parent;
 import com.kidzona.parentsservice.exception.ConflictException;
@@ -16,15 +21,18 @@ public class ParentService {
 	@Autowired
 	private ParentRepo parentRepo;
 
-	public List<Parent> findAll() {
-		return parentRepo.findAll();
+	public List<ParentDto> findAll() {
+		List<Parent>parentList= parentRepo.findAll();
+		 return parentList.stream()
+		          .map(ParentConverter::convertToDto)
+		          .collect(Collectors.toList());
 	}
 
-	public Parent getParentById(int id) throws NotFoundException {
+	public ParentDto getParentById(int id) throws NotFoundException {
 
 		try {
 
-			return parentRepo.getOne(id);
+			return ParentConverter.convertToDto(parentRepo.getOne(id));
 		} catch (Exception e) {
 			throw new NotFoundException("can't find parent with this id");
 		}
