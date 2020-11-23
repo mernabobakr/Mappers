@@ -1,14 +1,15 @@
 package com.kidzona.parentsservice.converter;
 
-import org.modelmapper.ModelMapper;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+
 
 import com.kidzona.parentsservice.dto.KidDto;
 import com.kidzona.parentsservice.entity.Kid;
 
 public class KidConverter {
 
-	static ModelMapper mapper = new ModelMapper();
-
+	static Mapper mapper = new DozerBeanMapper();
 	public static KidDto convertToDto(Kid kid) {
 		KidDto parentDto = mapper.map(kid, KidDto.class);
 		return parentDto;
