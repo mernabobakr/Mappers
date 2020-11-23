@@ -32,6 +32,12 @@ public class ParentController {
 		ParentDto result = parentService.getParentById(id);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+	@GetMapping("/parent/{id}")
+	public ResponseEntity<ParentDto> getParentByParentId(@PathVariable int id) {
+
+		ParentDto result = parentService.getParentByParentId(id);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
 
 	@PostMapping("/new")
 	public ResponseEntity<Parent> saveNewParent(@Valid @RequestBody Parent parent) {

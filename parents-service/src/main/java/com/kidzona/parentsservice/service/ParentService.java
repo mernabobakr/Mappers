@@ -37,7 +37,16 @@ public class ParentService {
 			throw new NotFoundException("can't find parent with this id");
 		}
 	}
+ 
+	public ParentDto getParentByParentId(int id) throws NotFoundException {
 
+		try {
+
+			return ParentConverter.convertToDto(parentRepo.getOne(id).getParent());
+		} catch (Exception e) {
+			throw new NotFoundException("can't find parent with this id");
+		}
+	}
 	public Parent saveParent(Parent parent) throws ConflictException {
 		try {
 			return this.parentRepo.save(parent);

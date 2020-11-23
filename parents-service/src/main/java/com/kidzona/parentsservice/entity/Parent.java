@@ -49,7 +49,9 @@ public class Parent {
     @JsonManagedReference
     @OneToMany(mappedBy = "parent")
     private Set<Kid> kids;
-
+    @OneToOne
+    private Parent parent;
+  
   
 
     public int getId() {
@@ -105,7 +107,15 @@ public class Parent {
         return kids;
     }
 
-    public void setKids(Set<Kid> kids) {
+    public Parent getParent() {
+		return parent;
+	}
+
+	public void setParent(Parent parent) {
+		this.parent = parent;
+	}
+
+	public void setKids(Set<Kid> kids) {
         this.kids = kids;
     }
 
