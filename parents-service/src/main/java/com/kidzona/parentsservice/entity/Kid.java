@@ -1,6 +1,8 @@
 package com.kidzona.parentsservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -37,13 +39,13 @@ public class Kid {
     private String status;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonManagedReference
     @JoinColumn(name = "parent_id")
     private Parent parent;
   
     @OneToMany(mappedBy = "kid")
     private Set<Skill> skills;
-
+    @JsonManagedReference
     public Set<Skill> getSkills() {
 		return skills;
 	}
@@ -100,7 +102,7 @@ public class Kid {
         this.status = status;
     }
 
-    @JsonIgnore
+    
     public Parent getParent() {
         return parent;
     }
