@@ -1,35 +1,56 @@
 package com.kidzona.parentsservice.service;
 
-import java.util.List;
+
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.kidzona.parentsservice.converter.ParentConverter;
+import com.kidzona.parentsservice.dto.ParentDto;
 import com.kidzona.parentsservice.entity.Kid;
 import com.kidzona.parentsservice.entity.Parent;
 import com.kidzona.parentsservice.exception.ConflictException;
 import com.kidzona.parentsservice.exception.NotAllowedException;
 import com.kidzona.parentsservice.exception.NotFoundException;
 import com.kidzona.parentsservice.repository.ParentRepo;
+import java.util.List;
+
 
 @Service
 public class ParentService {
 	@Autowired
 	private ParentRepo parentRepo;
+	@Autowired
+	ParentConverter parentConverter;
 
-	public List<Parent> findAll() {
-		return parentRepo.findAll();
+	public List<ParentDto> findAll() {
+		List<Parent>parentList= parentRepo.findAll();
+		 return parentList.stream()
+		          .map(parentConverter::convertToDto)
+		          .collect(Collectors.toList());
 	}
 
-	public Parent getParentById(int id) throws NotFoundException {
+	public ParentDto getParentById(int id) throws NotFoundException {
 
 		try {
 
-			return parentRepo.getOne(id);
+			return parentConverter.convertToDto(parentRepo.getOne(id));
 		} catch (Exception e) {
 			throw new NotFoundException("can't find parent with this id");
 		}
 	}
+ 
+	public ParentDto getParentByParentId(int id) throws NotFoundException {
 
+		try {
+
+			return parentConverter.convertToDto(parentRepo.getOne(id).getParent());
+		} catch (Exception e) {
+			throw new NotFoundException("can't find parent with this id");
+		}
+	}
 	public Parent saveParent(Parent parent) throws ConflictException {
 		try {
 			return this.parentRepo.save(parent);

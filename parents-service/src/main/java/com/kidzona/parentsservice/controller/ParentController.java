@@ -1,5 +1,6 @@
 package com.kidzona.parentsservice.controller;
 
+import com.kidzona.parentsservice.dto.ParentDto;
 import com.kidzona.parentsservice.entity.Kid;
 import com.kidzona.parentsservice.entity.Parent;
 import com.kidzona.parentsservice.service.ParentService;
@@ -20,15 +21,21 @@ public class ParentController {
 	private ParentService parentService;
 
 	@GetMapping(value = { "", "/" })
-	public ResponseEntity<List<Parent>> getAllSkill() {
-		List<Parent> result = parentService.findAll();
+	public ResponseEntity<List<ParentDto>> getAllSkill() {
+		List<ParentDto> result = parentService.findAll();
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Parent> getParentById(@PathVariable int id) {
+	public ResponseEntity<ParentDto> getParentById(@PathVariable int id) {
 
-		Parent result = parentService.getParentById(id);
+		ParentDto result = parentService.getParentById(id);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	@GetMapping("/parent/{id}")
+	public ResponseEntity<ParentDto> getParentByParentId(@PathVariable int id) {
+
+		ParentDto result = parentService.getParentByParentId(id);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
