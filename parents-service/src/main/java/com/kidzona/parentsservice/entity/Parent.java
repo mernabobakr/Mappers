@@ -13,7 +13,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "parents")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" }, ignoreUnknown = true)
 public class Parent {
 
 	@Id
@@ -44,7 +43,7 @@ public class Parent {
 	@NotNull(message = "an Email should be provided")
 	@Email(message = "Not a valid email")
 	private String email;
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "parent")
 	private Set<Kid> kids;
 	@OneToOne

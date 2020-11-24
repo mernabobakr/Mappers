@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,7 +29,7 @@ public class Skill {
 		this.kid = kid;
 	}
 	@ManyToOne
-	@JsonIgnore
+	//@JsonBackReference
     @JoinColumn(name = "kid_id")
     private Kid kid;
 	public int getId() {
