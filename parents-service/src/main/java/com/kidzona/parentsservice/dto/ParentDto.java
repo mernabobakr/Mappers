@@ -4,6 +4,11 @@ public class ParentDto {
 	private int id;
 
 	private String firstName;
+	private String lastName;
+	private String address;
+	private String pictureUrl;
+	private String email2;
+
 
 	public String getLastName() {
 		return lastName;
@@ -30,17 +35,13 @@ public class ParentDto {
 	}
 
 	public String getEmail() {
-		return email;
+		return email2;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email2 = email;
 	}
 
-	private String lastName;
-	private String address;
-	private String pictureUrl;
-	private String email;
 
 	public int getId() {
 		return id;

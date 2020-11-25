@@ -1,5 +1,6 @@
 package com.kidzona.parentsservice.controller;
 
+import com.kidzona.parentsservice.dto.KidDto;
 import com.kidzona.parentsservice.dto.ParentDto;
 import com.kidzona.parentsservice.entity.Kid;
 import com.kidzona.parentsservice.entity.Parent;
@@ -40,9 +41,9 @@ public class ParentController {
 	}
 
 	@PostMapping("/new")
-	public ResponseEntity<Parent> saveNewParent(@Valid @RequestBody Parent parent) {
+	public ResponseEntity<Parent> saveNewParent(@Valid @RequestBody ParentDto parentDto) {
 
-		Parent result = parentService.saveParent(parent);
+		Parent result = parentService.saveParent(parentDto);
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 
 	}
@@ -55,9 +56,9 @@ public class ParentController {
 	}
 
 	@GetMapping("/{id}/kids/all")
-	public ResponseEntity<Set<Kid>> getAllKids(@PathVariable int id) {
+	public ResponseEntity<Set<KidDto>> getAllKids(@PathVariable int id) {
 
-		Set<Kid> result = parentService.getAllKidsByParentId(id);
+		Set<KidDto> result = parentService.getAllKidsByParentId(id);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 
 	}

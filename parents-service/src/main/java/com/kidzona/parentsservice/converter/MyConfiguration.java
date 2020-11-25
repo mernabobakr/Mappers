@@ -8,8 +8,9 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 
 public class MyConfiguration extends ConfigurableMapper {
-@Override
-protected void configure (MapperFactory factory) {
-	factory.classMap(Parent.class, ParentDto.class).register();;
-}
+	@Override
+	protected void configure(MapperFactory factory) {
+		factory.classMap(Parent.class, ParentDto.class).field("email", "email2").byDefault()
+		 .register();
+	}
 }

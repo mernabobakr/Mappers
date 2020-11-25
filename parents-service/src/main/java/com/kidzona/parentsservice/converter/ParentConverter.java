@@ -7,12 +7,15 @@ import com.kidzona.parentsservice.dto.ParentDto;
 import com.kidzona.parentsservice.entity.Parent;
 
 import ma.glasnost.orika.MapperFacade;
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
+
+
 @Component
 public class ParentConverter {
 	
+
+	@Autowired
 	MapperFacade mapper = new MyConfiguration();
+	
 
 	public ParentDto convertToDto(Parent parent) {
 		ParentDto parentDto = mapper.map(parent, ParentDto.class);
@@ -27,12 +30,11 @@ public class ParentConverter {
 	public static void main(String[] args) {
 		Parent parent = new Parent();
 		parent.setEmail("ndjfns");
-		parent.setFirstName("ddd");
+		parent.setFirstName("first");
 		parent.setId(3);
-		parent.setLastName("ddd");
+		parent.setLastName("last");
 		ParentConverter conv = new ParentConverter();
 		ParentDto d = conv.convertToDto(parent);
-		System.out.println(d.getEmail());
-		System.out.print("worked correctly");
+		
 	}
 }

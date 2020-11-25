@@ -1,7 +1,5 @@
 package com.kidzona.parentsservice.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -43,7 +41,7 @@ public class Parent {
 	@NotNull(message = "an Email should be provided")
 	@Email(message = "Not a valid email")
 	private String email;
-	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "parent")
 	private Set<Kid> kids;
 	@OneToOne
@@ -97,7 +95,6 @@ public class Parent {
 		this.email = email;
 	}
 
-	@JsonIgnore
 	public Set<Kid> getKids() {
 		return kids;
 	}

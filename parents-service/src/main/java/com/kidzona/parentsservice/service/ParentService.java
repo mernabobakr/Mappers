@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kidzona.parentsservice.converter.KidConverter;
 import com.kidzona.parentsservice.converter.ParentConverter;
+import com.kidzona.parentsservice.dto.KidDto;
 import com.kidzona.parentsservice.dto.ParentDto;
 import com.kidzona.parentsservice.entity.Kid;
 import com.kidzona.parentsservice.entity.Parent;
@@ -24,6 +26,8 @@ public class ParentService {
 	private ParentRepo parentRepo;
 	@Autowired
 	ParentConverter parentConverter;
+	@Autowired
+	KidConverter kidConverter;
 
 	public List<ParentDto> findAll() {
 		List<Parent>parentList= parentRepo.findAll();
@@ -51,18 +55,24 @@ public class ParentService {
 			throw new NotFoundException("can't find parent with this id");
 		}
 	}
-	public Parent saveParent(Parent parent) throws ConflictException {
+	public Parent saveParent(ParentDto parentDto) throws ConflictException {
 		try {
-			return this.parentRepo.save(parent);
+			return this.parentRepo.save(parentConverter.convertFromDto(parentDto));
 		} catch (Exception e) {
 			throw new ConflictException("this email already exists");
 		}
 	}
-
+/*
 	public Set<Kid> getAllKidsByParentId(int id) {
 		return parentRepo.getOne(id).getKids();
 	}
-
+*/
+	public Set<KidDto> getAllKidsByParentId(int id) {
+		Set<Kid>kids= parentRepo.getOne(id).getKids();
+		return kids.stream()
+		          .map(kidConverter::convertToDto)
+		          .collect(Collectors.toSet());
+	}
 	public void deleteParent(int id) throws NotAllowedException {
 
 		try {
