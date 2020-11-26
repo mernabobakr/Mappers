@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.kidzona.parentsservice.dto.KidDto;
+import com.kidzona.parentsservice.dto.SkillDto;
 import com.kidzona.parentsservice.entity.Kid;
-import com.kidzona.parentsservice.entity.Skill;
 import com.kidzona.parentsservice.service.KidService;
 
 @RestController
@@ -26,26 +28,26 @@ public class KidController {
 	private KidService kidService;
 
 	@GetMapping(value = { "", "/" })
-	public ResponseEntity<List<Kid>> getAllSkill() {
-		List<Kid> result = kidService.findAll();
+	public ResponseEntity<List<KidDto>> getAllSkill() {
+		List<KidDto> result = kidService.findAll();
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{id}/skill")
-	public ResponseEntity<Set<Skill>> getSkillById(@PathVariable int id) {
+	public ResponseEntity<Set<SkillDto>> getSkillById(@PathVariable int id) {
 
-		Set<Skill> result = kidService.getAllskillsByKidId(id);
+		Set<SkillDto> result = kidService.getAllskillsByKidId(id);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
 	@PostMapping("/{parentId}/new")
-	public ResponseEntity<Kid> saveNewKid(@PathVariable int parentId, @Valid @RequestBody Kid kid) {
+	public ResponseEntity<Kid> saveNewKid(@PathVariable int parentId, @Valid @RequestBody KidDto kid) {
 
 		Kid result = kidService.saveNewKid(kid, parentId);
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteParent(@PathVariable int id) {
 		kidService.deleteKid(id);

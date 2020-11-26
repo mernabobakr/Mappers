@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kidzona.parentsservice.dto.SkillDto;
 import com.kidzona.parentsservice.entity.Skill;
 import com.kidzona.parentsservice.service.SkillService;
 
@@ -22,15 +23,15 @@ public class SkillController {
 	@Autowired
 	private SkillService skillService;
 	@GetMapping(value = { "", "/" })
-	public ResponseEntity<List<Skill>> getAllSkill() {
-		List<Skill> result=skillService.findAll();
+	public ResponseEntity<List<SkillDto>> getAllSkill() {
+		List<SkillDto> result=skillService.findAll();
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/{KidId}/new")
-	public ResponseEntity<Skill> saveNewSkill(@PathVariable int KidId, @Valid @RequestBody Skill skill) {
+	public ResponseEntity<Skill> saveNewSkill(@PathVariable int KidId, @Valid @RequestBody SkillDto skillDto) {
 
-		Skill result = skillService.addSkil(skill,KidId);
+		Skill result = skillService.addSkil(skillDto,KidId);
 		
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 

@@ -2,7 +2,6 @@ package com.kidzona.parentsservice.controller;
 
 import com.kidzona.parentsservice.dto.KidDto;
 import com.kidzona.parentsservice.dto.ParentDto;
-import com.kidzona.parentsservice.entity.Kid;
 import com.kidzona.parentsservice.entity.Parent;
 import com.kidzona.parentsservice.service.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +28,10 @@ public class ParentController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ParentDto> getParentById(@PathVariable int id) {
-
 		ParentDto result = parentService.getParentById(id);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+
 	@GetMapping("/parent/{id}")
 	public ResponseEntity<ParentDto> getParentByParentId(@PathVariable int id) {
 
