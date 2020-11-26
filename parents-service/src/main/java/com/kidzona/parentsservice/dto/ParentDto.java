@@ -1,23 +1,21 @@
 package com.kidzona.parentsservice.dto;
 
+import java.util.Set;
+
 public class ParentDto {
-	//private int id;
-
-	private String firstName;
-	private String lastName;
-	//private String address;
-	//private String pictureUrl;
-	//private String email2;
+	private int id;
 
 
-	public String getLastName() {
-		return lastName;
-	}
+	private FullName fullName;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-/*
+	private String address;
+	private String pictureUrl;
+	private String email;
+	private Set<KidDto> kids;
+
+
+
+
 	public String getAddress() {
 		return address;
 	}
@@ -35,13 +33,13 @@ public class ParentDto {
 	}
 
 	public String getEmail() {
-		return email2;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		this.email2 = email;
+		this.email = email;
 	}
-/
+
 
 	public int getId() {
 		return id;
@@ -50,12 +48,22 @@ public class ParentDto {
 	public void setId(int id) {
 		this.id = id;
 	}
-*/
-	public String getFirstName() {
-		return firstName;
+
+	public FullName getFullName() {
+		return fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFullName(FullName fullName) {
+		this.fullName = fullName;
 	}
+
+	public Set<KidDto> getKids() {
+		return kids;
+	}
+
+	public void setKids(Set<KidDto> kids) {
+		this.kids = kids;
+	}
+
+
 }

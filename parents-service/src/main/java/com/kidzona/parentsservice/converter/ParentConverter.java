@@ -11,15 +11,15 @@ import com.kidzona.parentsservice.entity.Parent;
 public class ParentConverter {
 	
 	  public static void main(String[] args) {
-		   SimpleSourceDestinationMapper mapper
-		     = Mappers.getMapper(SimpleSourceDestinationMapper.class);
+		 
 		  Parent parent = new Parent();
 			parent.setEmail("ndjfns");
 			parent.setFirstName("first");
 			parent.setId(3);
 			parent.setLastName("last");
-			ParentDto parentDto = mapper.parentToParentDTO(parent);
-			System.out.println(parentDto.getFirstName());
+			 ParentDto parentDto = ParentMapper.INSTANCE.parentToParentDto( parent );
+			
+			System.out.println(parentDto.getFullName().getFirst());
 			//ParentConverter conv = new ParentConverter();
 			//ParentDto d = conv.convertToDto(parent);
 	    }
