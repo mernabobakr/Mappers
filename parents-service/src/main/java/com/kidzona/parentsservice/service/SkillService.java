@@ -40,4 +40,7 @@ public class SkillService {
 			throw new NotFoundException("You cann't add skill with same name");
 		}
 	}
+	
+	
+	
 }

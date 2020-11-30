@@ -1,5 +1,6 @@
 package com.kidzona.parentsservice.controller;
 
+import com.kidzona.parentsservice.dto.ParentDto;
 import com.kidzona.parentsservice.entity.Kid;
 import com.kidzona.parentsservice.entity.Parent;
 import com.kidzona.parentsservice.service.ParentService;

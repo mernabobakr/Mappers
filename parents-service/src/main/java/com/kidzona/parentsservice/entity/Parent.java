@@ -1,111 +1,114 @@
 package com.kidzona.parentsservice.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 import java.util.Set;
 
 @Entity
 @Table(name = "parents")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"},ignoreUnknown = true)
 public class Parent {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    private int id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
+	private int id;
 
-    @Column(name = "first_name")
-    @NotNull(message = "first name should be provided")
-    @NotEmpty(message = "first name can not be empty")
-    private String firstName;
+	@Column(name = "first_name")
+	@NotNull(message = "first name should be provided")
+	@NotEmpty(message = "first name can not be empty")
+	private String firstName;
 
-    @Column(name = "last_name")
-    @NotNull(message = "last name should be provided")
-    @NotEmpty(message = "last name can not be empty")
-    private String lastName;
+	@Column(name = "last_name")
+	@NotNull(message = "last name should be provided")
+	@NotEmpty(message = "last name can not be empty")
+	private String lastName;
 
-    @Column(name = "address")
-    @NotNull(message = "address should be provided")
-    @NotEmpty(message = "address can not be empty")
-    private String address;
+	@Column(name = "address")
+	@NotNull(message = "address should be provided")
+	@NotEmpty(message = "address can not be empty")
+	private String address;
 
-    @Column(name = "picture_url")
-    private String pictureUrl;
+	@Column(name = "picture_url")
+	private String pictureUrl;
 
-    @Column(name = "email",unique=true)
-    @NotNull(message = "an Email should be provided")
-    @Email(message = "Not a valid email")
-    private String email;
+	@Column(name = "email", unique = true)
+	@NotNull(message = "an Email should be provided")
+	@Email(message = "Not a valid email")
+	private String email;
+	@JsonManagedReference
+	@OneToMany(mappedBy = "parent")
+	private Set<Kid> kids;
+	@OneToOne
+	private Parent parent;
 
-    @OneToMany(mappedBy = "parent")
-    private Set<Kid> kids;
+	public int getId() {
+		return id;
+	}
 
-  
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
 
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Set<Kid> getKids() {
+		return kids;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public Parent getParent() {
+		return parent;
+	}
 
-    @JsonIgnore
-    public Set<Kid> getKids() {
-        return kids;
-    }
+	public void setParent(Parent parent) {
+		this.parent = parent;
+	}
 
-    public void setKids(Set<Kid> kids) {
-        this.kids = kids;
-    }
+	public void setKids(Set<Kid> kids) {
+		this.kids = kids;
+	}
 
-   
-
-    
 }
