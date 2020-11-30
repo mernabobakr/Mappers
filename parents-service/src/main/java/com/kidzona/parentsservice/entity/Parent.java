@@ -1,5 +1,5 @@
 package com.kidzona.parentsservice.entity;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -7,6 +7,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,8 +46,19 @@ public class Parent {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "parent")
 	private Set<Kid> kids;
+	@JsonIgnore
 	@OneToOne
 	private Parent parent;
+	@Transient
+    private List<Parent> childrenItems=new ArrayList<Parent>();
+
+	@Override
+	public String toString() {
+		
+		{
+	        return "Parent [Id=" + id + ", name=" + firstName + ",   childrenItems=" + childrenItems + "]";
+	    }
+	}
 
 	public int getId() {
 		return id;
@@ -109,6 +122,20 @@ public class Parent {
 
 	public void setKids(Set<Kid> kids) {
 		this.kids = kids;
+	}
+
+	public List<Parent> getChildrenItems() {
+		return childrenItems;
+	}
+
+	public void setChildrenItems(List<Parent> childrenItems) {
+		this.childrenItems = childrenItems;
+	}
+
+	public void addChildrenItem(Parent child) {
+		if(!this.childrenItems.contains(child))
+            this.childrenItems.add(child);
+		
 	}
 
 }

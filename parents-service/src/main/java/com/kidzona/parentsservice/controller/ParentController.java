@@ -19,6 +19,13 @@ public class ParentController {
 
 	@Autowired
 	private ParentService parentService;
+	
+	@GetMapping(value = { "/hierarchical" })
+	public ResponseEntity<List<Parent>> gethierarchicalParents() {
+		//List<Parent> result = parentService.gethierarchicalParents();
+		List<Parent> result=parentService.gethierarchicalParents();
+		return new ResponseEntity<>( result,HttpStatus.CREATED);
+	}
 
 	@GetMapping(value = { "", "/" })
 	public ResponseEntity<List<ParentDto>> getAllSkill() {

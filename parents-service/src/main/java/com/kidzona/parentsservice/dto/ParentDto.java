@@ -1,6 +1,10 @@
 package com.kidzona.parentsservice.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+
+import com.kidzona.parentsservice.entity.Parent;
 
 
 public class ParentDto {
@@ -14,7 +18,7 @@ public class ParentDto {
 	private String email;
 	private Set<KidDto> kids;
 
-
+	 private List<Parent> childrenItems=new ArrayList<Parent>();
 
 
 	public String getAddress() {
@@ -64,6 +68,14 @@ public class ParentDto {
 
 	public void setKids(Set<KidDto> kids) {
 		this.kids = kids;
+	}
+
+	public List<Parent> getChildrenItems() {
+		return childrenItems;
+	}
+
+	public void setChildrenItems(List<Parent> childrenItems) {
+		this.childrenItems = childrenItems;
 	}
 
 
