@@ -89,21 +89,28 @@ public class ParentService {
 			} else {
 
 				child = new Parent();
-				child.setFirstName(p.getFirstName());
+				
 				hm.put(p.getId(), child);
-			}
-			child.setId(p.getId());
-			child.setFirstName(p.getFirstName());
-			child.setLastName(p.getLastName());
-			child.setEmail(p.getEmail());
-			child.setPictureUrl(p.getPictureUrl());
-			child.setAddress(p.getAddress());
+				child.setId(p.getId());
+				child.setFirstName(p.getFirstName());
+				child.setLastName(p.getLastName());
+				child.setEmail(p.getEmail());
+				child.setPictureUrl(p.getPictureUrl());
+				child.setAddress(p.getAddress());
 
+				
+				
+				
+			}
 			child.setParent(p.getParent());
+			System.out.println(child);
+			
+			
+			
 
 			// getting parents for that parent
 			Parent parent;
-			if (p.getParent() != null) {
+			if (p.getParent() != null) {  
 				if (hm.containsKey(p.getParent().getId())) {
 
 					parent = hm.get((p.getParent().getId()));
@@ -115,6 +122,12 @@ public class ParentService {
 					parent.setParent(null);
 				}
 				parent.setId(p.getParent().getId());
+				
+				parent.setFirstName(p.getParent().getFirstName());
+				parent.setLastName(p.getParent().getLastName());
+				parent.setEmail(p.getParent().getEmail());
+				parent.setPictureUrl(p.getParent().getPictureUrl());
+				parent.setAddress(p.getParent().getAddress());
 
 				parent.addChildrenItem(child);
 
